@@ -1,0 +1,2035 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* Main colors */
+
+:root {
+  --bg: #080c1c;
+  --panel: #121e35;
+  --border: #31415e;
+  --text: #f3f8ff;
+  --muted: #a0b1cc;
+
+  --blue: #64deff;
+  --purple: #b299ff;
+
+  --gradient: linear-gradient(
+    115deg,
+    #65e1ff,
+    #65adff,
+    #b18cff
+  );
+
+  --transition: all 0.22s ease;
+}
+
+
+/* Basic settings */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      ellipse at 11% 5%,
+      rgba(32,175,239,.15),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 95% 12%,
+      rgba(160,89,240,.18),
+      transparent 36%
+    ),
+    var(--bg);
+}
+
+
+/* Animated background */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 72%,
+      rgba(69,134,225,.07),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(179,85,255,.08),
+      transparent 38%
+    );
+
+  animation: ambient 12s ease-in-out infinite alternate;
+}
+
+@keyframes ambient {
+  to {
+    transform: translate(2%, -2%);
+    opacity: .6;
+  }
+}
+
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* Main page */
+
+.app {
+  max-width: 1600px;
+  margin: auto;
+  padding: 20px 24px 15px;
+}
+
+
+/* Header */
+
+.hero {
+  display: grid;
+
+  grid-template-columns: 1fr auto;
+
+  gap: 12px 30px;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+
+/* Logo */
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  grid-column: 1 / -1;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.4px;
+
+  color: #e4f6ff;
+}
+
+.brand-symbol {
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 12px;
+
+  background: var(--gradient);
+  color: #071629;
+
+  font-size: 21px;
+
+  box-shadow: 0 0 20px #63cfff44;
+}
+
+.brand-tag {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+
+  color: #9fc2e3;
+
+  border: 1px solid #3c4e6a;
+  border-radius: 20px;
+
+  padding: 6px 11px;
+}
+
+
+/* Main title */
+
+.hero h1 {
+  margin: 0;
+
+  font-family: 'Space Grotesk', sans-serif;
+
+  font-size: clamp(26px, 3.35vw, 48px);
+
+  letter-spacing: -1.9px;
+  line-height: 1.12;
+}
+
+.hero h1 em {
+  font-style: normal;
+
+  background: var(--gradient);
+  color: transparent;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hero p {
+  margin: 6px 0 0;
+
+  font-size: 13px;
+  color: var(--muted);
+}
+
+
+/* Three project steps */
+
+.steps {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  white-space: nowrap;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: .5px;
+}
+
+.steps span:not(.steps-arrow) {
+  border-radius: 30px;
+  border: 1px solid #324761;
+
+  background: #17263d;
+
+  padding: 10px 12px;
+}
+
+.steps b {
+  color: var(--blue);
+  margin-right: 5px;
+}
+
+.steps-arrow {
+  color: #7182a3;
+}
+
+
+/* Two panels next to each other */
+
+.studio {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 16px;
+}
+
+
+/* Main panels */
+
+.panel {
+  min-width: 0;
+  padding: 17px;
+
+  background: linear-gradient(
+    150deg,
+    rgba(26,43,69,.97),
+    rgba(14,25,45,.97)
+  );
+
+  border: 1px solid var(--border);
+  border-radius: 23px;
+
+  box-shadow: 0 18px 60px #0005;
+}
+
+.create-panel {
+  box-shadow:
+    0 18px 60px #0005,
+    inset 0 0 26px #5adcff07;
+}
+
+.result-panel {
+  border-color: #4c477b;
+
+  box-shadow:
+    0 18px 60px #0005,
+    inset 0 0 30px #a486ff0b;
+}
+
+
+/* Panel headers */
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  min-height: 55px;
+
+  padding-bottom: 13px;
+  margin-bottom: 13px;
+
+  border-bottom: 1px solid #ffffff17;
+}
+
+.eyebrow {
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+
+  color: var(--blue);
+}
+
+.result-panel .eyebrow {
+  color: #c4a6ff;
+}
+
+.panel-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+
+  font-size: clamp(16px, 1.5vw, 21px);
+
+  letter-spacing: -.5px;
+
+  margin: 5px 0 0;
+}
+
+.panel-header h2 span {
+  color: #7dddfa;
+}
+
+
+/* Status badges */
+
+.panel-badge {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  color: #b6d9e9;
+
+  border: 1px solid #3e4f6b;
+  border-radius: 22px;
+
+  padding: 9px;
+
+  white-space: nowrap;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.dot-blue {
+  background: #65e0ff;
+  box-shadow: 0 0 12px #65e0ff;
+}
+
+.dot-purple {
+  background: #b299ff;
+  box-shadow: 0 0 12px #b299ff;
+}
+
+
+/* Drawing editor */
+
+.editor {
+  display: grid;
+
+  grid-template-columns:
+    43px minmax(0, 1fr) 43px;
+
+  gap: 8px;
+
+  align-items: stretch;
+}
+
+
+/* Drawing tools and colors */
+
+.drawing-toolbar,
+.colors-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  background: linear-gradient(
+    #1c304d,
+    #14243c
+  );
+
+  border: 1px solid #36506b;
+  border-radius: 13px;
+
+  padding: 8px 3px;
+}
+
+
+/* Drawing buttons */
+
+.drawing-tool {
+  display: grid;
+  place-items: center;
+
+  width: 35px;
+  height: 35px;
+
+  padding: 0;
+
+  font-size: 23px;
+
+  color: #b4cbe5;
+
+  border: 1px solid #ffffff12;
+  border-radius: 10px;
+
+  background: #ffffff07;
+
+  transition: var(--transition);
+}
+
+.drawing-tool:hover {
+  transform: translateY(-2px);
+
+  color: #80dfff;
+  background: #ffffff18;
+}
+
+.drawing-tool.active {
+  color: #071629;
+
+  background: var(--gradient);
+
+  box-shadow: 0 0 16px #5de5ff55;
+}
+
+
+/* Brush size */
+
+.toolbar-size {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 5px;
+
+  width: 100%;
+
+  border-top: 1px solid #ffffff1b;
+
+  padding-top: 10px;
+}
+
+.toolbar-size label {
+  font-size: 9px;
+  font-weight: 800;
+
+  color: var(--blue);
+}
+
+#brush-size {
+  writing-mode: vertical-lr;
+  direction: rtl;
+
+  height: 75px;
+  width: 18px;
+
+  accent-color: var(--blue);
+
+  margin: 4px auto;
+}
+
+
+/* Color palette */
+
+.colors-panel h3 {
+  font-size: 8px;
+  letter-spacing: 1px;
+
+  color: var(--blue);
+
+  margin: 3px 0 5px;
+}
+
+#colors {
+  display: grid;
+  justify-items: center;
+
+  gap: 7px;
+  width: 100%;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 9px;
+  border: 2px solid #1d314a;
+
+  padding: 0;
+
+  box-shadow: 0 2px 8px #0004;
+
+  transition: var(--transition);
+}
+
+.color-swatch.selected {
+  border: 2px solid white;
+
+  box-shadow:
+    0 0 0 2px var(--blue),
+    0 0 12px #65dfff88;
+}
+
+.color-swatch:hover {
+  transform: scale(1.09);
+}
+
+
+/* Drawing canvas */
+
+.canvas-column {
+  min-width: 0;
+}
+
+.canvas-wrap {
+  position: relative;
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 4px solid #385674;
+  border-radius: 14px;
+
+  box-shadow: 0 0 25px #63baff16;
+}
+
+#canvas-host,
+#canvas-host canvas {
+  width: 100%;
+}
+
+#canvas-host canvas {
+  display: block;
+
+  width: 100% !important;
+  height: auto !important;
+
+  touch-action: none;
+  cursor: crosshair;
+}
+
+
+/* AI result area */
+
+.result-stage {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 900 / 585;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 43%,
+      #263a68 0%,
+      #15223b 52%,
+      #101829 100%
+    );
+
+  border: 4px solid #504773;
+  border-radius: 14px;
+
+  box-shadow:
+    inset 0 0 60px #a678ff10,
+    0 0 25px #9e74ff18;
+}
+
+
+/* AI generated image */
+
+/* AI image fills the result canvas */
+
+/* AI image fills the result canvas without distortion */
+
+#ai-result {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+  background: white;
+
+  animation: reveal 0.7s ease both;
+}
+
+
+/* Placeholder before AI generation */
+
+.result-placeholder {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  text-align: center;
+  overflow: hidden;
+}
+
+.result-stage:has(#ai-result:not([hidden])) .result-placeholder {
+  display: none;
+}
+
+
+/* Decorative moving circle */
+
+.art-orbit {
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+  max-width: 85%;
+
+  border-radius: 50%;
+
+  border: 1px dashed #7aa8ff3a;
+
+  animation: spin 28s linear infinite;
+
+  pointer-events: none;
+}
+
+.art-orbit span {
+  position: absolute;
+
+  color: #a9d4ff;
+  font-size: 27px;
+
+  text-shadow: 0 0 15px #94bdff;
+}
+
+.art-orbit span:nth-child(1) {
+  top: -15px;
+  left: 45%;
+}
+
+.art-orbit span:nth-child(2) {
+  bottom: 12%;
+  right: -10px;
+}
+
+.art-orbit span:nth-child(3) {
+  bottom: 12%;
+  left: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Placeholder icon */
+
+.placeholder-icon {
+  font-size: 50px;
+
+  filter: drop-shadow(
+    0 0 18px #8ea4ff80
+  );
+
+  margin: 10px 0 4px;
+}
+
+.result-placeholder h3 {
+  font-family: 'Space Grotesk', sans-serif;
+
+  font-size: clamp(17px, 2vw, 26px);
+
+  margin: 8px 0;
+
+  z-index: 1;
+}
+
+.result-placeholder p {
+  color: #b6c6df;
+
+  max-width: 320px;
+
+  font-size: 12px;
+  line-height: 1.65;
+
+  z-index: 1;
+}
+
+
+/* Placeholder labels */
+
+.placeholder-pills {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 14px;
+
+  color: #c1d8f9;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  z-index: 1;
+}
+
+.placeholder-pills span:first-child,
+.placeholder-pills span:last-child {
+  padding: 7px 11px;
+
+  border: 1px solid #6b79ad80;
+  border-radius: 20px;
+}
+
+
+/* Buttons below drawing canvas */
+
+.bottom-actions,
+.result-footer {
+  display: flex;
+  gap: 8px;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 13px;
+
+  min-height: 48px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 7px;
+}
+
+#clear-btn,
+#save-btn,
+#remove-ai-btn {
+  background: #253753;
+
+  border: 1px solid #4a5c79;
+  color: #e1edff;
+
+  border-radius: 11px;
+
+  min-height: 43px;
+
+  padding: 9px 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  transition: var(--transition);
+}
+
+#clear-btn:hover,
+#save-btn:hover,
+#remove-ai-btn:hover {
+  border-color: var(--blue);
+
+  transform: translateY(-2px);
+}
+
+
+/* Main AI button */
+
+#generate-btn {
+  flex: 1;
+
+  max-width: 255px;
+  min-height: 45px;
+
+  border: 0;
+  border-radius: 11px;
+
+  background: var(--gradient);
+  color: #071629;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  box-shadow: 0 6px 25px #61c4ff44;
+
+  transition: var(--transition);
+
+  animation: glow 3s ease-in-out infinite;
+}
+
+#generate-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 34px #77c7ff88;
+}
+
+#generate-btn:disabled {
+  opacity: .6;
+  cursor: wait;
+
+  animation: none;
+}
+
+@keyframes glow {
+  50% {
+    box-shadow: 0 6px 32px #9d89ff75;
+  }
+}
+
+
+/* AI result footer */
+
+.result-tip {
+  display: flex;
+  gap: 8px;
+
+  align-items: center;
+
+  font-size: 11px;
+
+  color: #adbbd3;
+}
+
+.sparkle {
+  font-size: 23px;
+  color: #bb9cff;
+}
+
+.result-footer #remove-ai-btn {
+  flex-shrink: 0;
+}
+
+
+/* AI status messages */
+
+.ai-status {
+  text-align: center;
+
+  color: #9ee6ff;
+
+  border: 1px solid #3b6170;
+  border-radius: 11px;
+
+  background: #19354a;
+
+  padding: 12px;
+  margin: 12px 0 0;
+
+  font-size: 12px;
+}
+
+.ai-status:empty {
+  display: none;
+}
+
+.ai-status.error {
+  color: #ffb7c5;
+
+  border-color: #84485c;
+
+  background: #422238;
+}
+
+
+/* Loading screen */
+
+#loading {
+  position: absolute;
+  inset: 0;
+
+  z-index: 5;
+
+  display: grid;
+  place-items: center;
+
+  background: #0b1126ed;
+
+  backdrop-filter: blur(10px);
+
+  padding: 12px;
+
+  text-align: center;
+}
+
+.loading-content {
+  position: relative;
+
+  width: 100%;
+  max-width: 330px;
+
+  border: 1px solid #5d628d;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    140deg,
+    #23345e,
+    #17223b
+  );
+
+  padding: 25px 22px;
+
+  overflow: hidden;
+
+  box-shadow: 0 0 45px #9d81ff3c;
+}
+
+
+/* Animated paintbrush */
+
+.magic-brush {
+  font-size: 48px;
+
+  position: relative;
+  z-index: 2;
+
+  display: inline-block;
+
+  animation: brush 1.8s ease-in-out infinite;
+}
+
+@keyframes brush {
+  50% {
+    transform: translateY(-12px) rotate(23deg);
+  }
+}
+
+
+/* Loading title */
+
+.loading-content h3 {
+  font-family: 'Space Grotesk', sans-serif;
+
+  font-size: 21px;
+
+  margin: 12px 0 8px;
+
+  position: relative;
+  z-index: 2;
+}
+
+#loading-message {
+  position: relative;
+  z-index: 2;
+
+  font-size: 12px;
+  color: #adf0ff;
+
+  min-height: 20px;
+}
+
+.loading-tip {
+  font-size: 10px;
+  color: #adbfda;
+
+  margin: 13px 0 0;
+}
+
+
+/* Floating emojis */
+
+.magic-particles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.magic-particles span {
+  position: absolute;
+
+  bottom: -30px;
+
+  animation: float 4s linear infinite;
+
+  opacity: 0;
+}
+
+.magic-particles span:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.magic-particles span:nth-child(2) {
+  left: 24%;
+  animation-delay: 1s;
+}
+
+.magic-particles span:nth-child(3) {
+  left: 42%;
+  animation-delay: 2s;
+}
+
+.magic-particles span:nth-child(4) {
+  left: 63%;
+  animation-delay: .4s;
+}
+
+.magic-particles span:nth-child(5) {
+  left: 78%;
+  animation-delay: 1.6s;
+}
+
+.magic-particles span:nth-child(6) {
+  left: 91%;
+  animation-delay: 2.5s;
+}
+
+@keyframes float {
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-240px) rotate(240deg);
+    opacity: 0;
+  }
+}
+
+
+/* Loading progress bar */
+
+.loading-track {
+  height: 8px;
+
+  margin-top: 20px;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background: #091326;
+}
+
+.loading-bar {
+  width: 45%;
+  height: 100%;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #65ddff,
+    #a78bfa,
+    #ff8bd1
+  );
+
+  animation: bar 2.3s linear infinite;
+}
+
+@keyframes bar {
+  to {
+    transform: translateX(330%);
+  }
+}
+
+
+/* Animation for the generated image */
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    filter: blur(9px);
+    transform: scale(1.02);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+
+/* Footer */
+
+footer {
+  text-align: center;
+
+  margin-top: 13px;
+  padding: 11px;
+
+  color: #8597b6;
+
+  font-size: 10px;
+  letter-spacing: .4px;
+}
+
+footer span {
+  color: var(--blue);
+  margin: 0 6px;
+}
+
+
+/* Tablet and smaller laptop screens */
+
+@media (max-width: 1150px) {
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
+    justify-content: flex-start;
+  }
+
+  .studio {
+    grid-template-columns: 1fr;
+  }
+
+  .result-stage {
+    max-height: 520px;
+  }
+
+}
+
+
+/* Mobile screens */
+
+@media (max-width: 600px) {
+
+  .app {
+    padding: 12px 9px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 12px;
+  }
+
+  .brand {
+    font-size: 10px;
+  }
+
+  .steps {
+    font-size: 8px;
+    gap: 3px;
+  }
+
+  .steps span:not(.steps-arrow) {
+    padding: 7px 5px;
+  }
+
+  .panel {
+    padding: 10px;
+  }
+
+  .editor {
+    grid-template-columns:
+      34px minmax(0, 1fr) 34px;
+
+    gap: 4px;
+  }
+
+  .drawing-toolbar,
+  .colors-panel {
+    padding: 5px 1px;
+    gap: 6px;
+  }
+
+  .drawing-tool {
+    width: 28px;
+    height: 28px;
+    font-size: 19px;
+  }
+
+  .color-swatch {
+    width: 23px;
+    height: 23px;
+  }
+
+  .colors-panel h3 {
+    font-size: 7px;
+  }
+
+  #brush-size {
+    height: 65px;
+  }
+
+  .panel-badge {
+    font-size: 7px;
+  }
+
+  .bottom-actions {
+    flex-wrap: wrap;
+  }
+
+  #generate-btn {
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .result-placeholder p {
+    font-size: 10px;
+  }
+
+  .placeholder-pills {
+    display: none;
+  }
+
+}
+
+
+/* Reduced animation */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+}
+/* These buttons appear below the AI-generated image */
+
+.result-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Save AI artwork button */
+
+#save-ai-btn {
+  background: linear-gradient(
+    120deg,
+    #65e1ff,
+    #b18cff
+  );
+
+  border: none;
+  border-radius: 11px;
+
+  min-height: 43px;
+  padding: 9px 14px;
+
+  color: #071629;
+  font-size: 11px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#save-ai-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(101, 221, 255, 0.35);
+}
+/* Button for opening the projector screen */
+
+#projector-btn {
+  min-height: 43px;
+  padding: 9px 15px;
+
+  border: 1px solid #b18cff;
+  border-radius: 11px;
+
+  background: rgba(177, 140, 255, 0.12);
+  color: #d9c9ff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition: all 0.2s ease;
+}
+
+#projector-btn:hover {
+  background: rgba(177, 140, 255, 0.25);
+
+  box-shadow: 0 0 20px rgba(177, 140, 255, 0.3);
+
+  transform: translateY(-2px);
+}
+
+#projector-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}/* Hide the AI result panel on the laptop */
+
+.result-panel {
+  display: none !important;
+}
+
+/* Show only the drawing workspace on the laptop */
+
+.studio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Keep the drawing canvas centered */
+
+.create-panel {
+  width: 100%;
+}/* BIGGER CREATIVE CANVAS Laptop drawing mode
+ */
+
+/* Hide the AI panel on the laptop */
+.result-panel {
+  display: none !important;
+}
+
+/* Make the drawing workspace wider */
+.studio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* Make the main drawing panel bigger */
+.create-panel {
+  width: 100%;
+  padding: 25px;
+  border-radius: 25px;
+}
+
+/* Larger workspace title */
+.panel-header h2 {
+  font-size: 28px;
+}
+
+/* Give more space to the drawing tools */
+.editor {
+  display: grid;
+  grid-template-columns: 85px minmax(0, 1fr) 85px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Bigger tool panels */
+.drawing-toolbar,
+.colors-panel {
+  padding: 18px 10px;
+  gap: 15px;
+  border-radius: 20px;
+}
+
+/* Bigger drawing buttons */
+.drawing-tool {
+  width: 62px;
+  height: 62px;
+  font-size: 35px;
+  border-radius: 16px;
+}
+
+/* Larger brush size control */
+.toolbar-size {
+  gap: 12px;
+  padding-top: 20px;
+}
+
+.toolbar-size label {
+  font-size: 13px;
+}
+
+#brush-size {
+  height: 160px;
+  width: 25px;
+}
+
+/* Bigger color buttons */
+.colors-panel h3 {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+#colors {
+  gap: 13px;
+}
+
+.color-swatch {
+  width: 53px;
+  height: 53px;
+  border-radius: 15px;
+}
+
+/* Bigger drawing canvas */
+.canvas-column {
+  min-width: 0;
+  width: 100%;
+}
+
+.canvas-wrap {
+  width: 100%;
+  border: 7px solid #385674;
+  border-radius: 20px;
+}
+
+#canvas-host {
+  width: 100%;
+}
+
+#canvas-host canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Bigger action buttons */
+.bottom-actions {
+  margin-top: 22px;
+  gap: 16px;
+}
+
+#clear-btn,
+#save-btn,
+#projector-btn {
+  min-height: 55px;
+  padding: 13px 21px;
+  font-size: 14px;
+}
+
+#generate-btn {
+  min-height: 60px;
+  max-width: 330px;
+  padding: 15px 25px;
+  font-size: 16px;
+}
+
+/* Keep everything usable on smaller screens */
+@media (max-width: 800px) {
+  .create-panel {
+    padding: 12px;
+  }
+
+  .editor {
+    grid-template-columns: 50px minmax(0, 1fr) 50px;
+    gap: 7px;
+  }
+
+  .drawing-toolbar,
+  .colors-panel {
+    padding: 9px 4px;
+    gap: 9px;
+  }
+
+  .drawing-tool {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
+
+  .color-swatch {
+    width: 34px;
+    height: 34px;
+  }
+
+  #brush-size {
+    height: 100px;
+  }
+
+  .bottom-actions {
+    flex-wrap: wrap;
+  }
+
+  #generate-btn {
+    max-width: none;
+    flex-basis: 100%;
+  }
+}
+/* DRAW TO LIFE - FIT TO SCREEN Everything fits without scrolling
+/* Make the page fit the laptop screen */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Main layout */
+.app {
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  padding: 12px 20px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Smaller header */
+.hero {
+  flex-shrink: 0;
+  margin-bottom: 10px;
+  gap: 5px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(24px, 2.6vw, 38px);
+}
+
+.hero p {
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.brand {
+  font-size: 11px;
+}
+
+.steps {
+  font-size: 9px;
+}
+
+/* Main workspace fills available space */
+.studio {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Hide AI panel on laptop */
+.result-panel {
+  display: none !important;
+}
+
+/* Drawing panel */
+.create-panel {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 0;
+  padding: 14px 18px;
+  overflow: hidden;
+}
+
+/* Smaller workspace header */
+.panel-header {
+  flex-shrink: 0;
+  min-height: 0;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+}
+
+.panel-header h2 {
+  font-size: 21px;
+}
+
+/* Drawing tools and canvas */
+.editor {
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 76px;
+  gap: 12px;
+}
+
+/* Tool panels */
+.drawing-toolbar,
+.colors-panel {
+  min-height: 0;
+  padding: 8px 6px;
+  gap: 7px;
+  overflow: hidden;
+}
+
+/* Drawing buttons */
+.drawing-tool {
+  width: 50px;
+  height: 50px;
+  font-size: 29px;
+}
+
+/* Colors */
+#colors {
+  gap: 5px;
+}
+
+.color-swatch {
+  width: clamp(24px, 4.5vh, 42px);
+  height: clamp(24px, 4.5vh, 42px);
+  border-radius: 11px;
+}
+
+/* Brush size */
+.toolbar-size {
+  padding-top: 8px;
+  gap: 4px;
+}
+
+#brush-size {
+  height: clamp(50px, 11vh, 100px);
+}
+
+/* Canvas area */
+.canvas-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.canvas-wrap {
+  width: min(100%, calc((100vh - 255px) * 900 / 585));
+  max-height: 100%;
+  aspect-ratio: 900 / 585;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 5px solid #385674;
+}
+
+/* Canvas keeps its original proportions */
+#canvas-host {
+  width: 100%;
+}
+
+#canvas-host canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 100%;
+}
+
+/* Buttons always visible */
+.bottom-actions {
+  flex-shrink: 0;
+  margin-top: 10px;
+  min-height: 50px;
+  gap: 10px;
+}
+
+#clear-btn,
+#save-btn,
+#projector-btn {
+  min-height: 44px;
+  padding: 9px 13px;
+  font-size: 12px;
+}
+
+#generate-btn {
+  min-height: 48px;
+  max-width: 300px;
+  font-size: 14px;
+}
+
+/* Hide footer to save space */
+footer {
+  display: none;
+}
+
+/* Smaller laptop screens */
+@media (max-height: 750px) {
+  .app {
+    padding: 8px 14px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 11px;
+  }
+
+  .steps {
+    display: none;
+  }
+
+  .create-panel {
+    padding: 10px;
+  }
+
+  .editor {
+    grid-template-columns: 60px minmax(0, 1fr) 60px;
+    gap: 7px;
+  }
+
+  .drawing-tool {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
+  .color-swatch {
+    width: 29px;
+    height: 29px;
+  }
+
+  .panel-header {
+    margin-bottom: 6px;
+  }
+}
+
+
+/* More space for tools on both sides */
+.editor {
+  grid-template-columns: 105px minmax(0, 1fr) 105px;
+  gap: 14px;
+}
+
+/* Wider tool panels */
+.drawing-toolbar,
+.colors-panel {
+  width: 100%;
+  padding: 12px 8px;
+  gap: 10px;
+  border-radius: 18px;
+}
+
+/* Bigger brush, eraser, undo and redo buttons */
+.drawing-tool {
+  width: 76px;
+  height: 64px;
+  min-height: 0;
+
+  font-size: 36px;
+  border-radius: 15px;
+}
+
+/* Bigger color palette */
+#colors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Bigger color buttons */
+.color-swatch {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+}
+
+/* Make the brush size section bigger */
+.toolbar-size {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 12px;
+  gap: 10px;
+}
+
+/* Brush size label */
+.toolbar-size label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* Longer brush size slider */
+#brush-size {
+  writing-mode: vertical-lr;
+  direction: rtl;
+
+  width: 36px;
+  height: clamp(90px, 22vh, 210px);
+
+  margin: 8px auto;
+
+  accent-color: #65e1ff;
+  cursor: pointer;
+}
+
+/* Make the slider easier to grab */
+#brush-size::-webkit-slider-thumb {
+  width: 28px;
+  height: 28px;
+  cursor: grab;
+}
+
+/* Keep the drawing canvas flexible */
+.canvas-column {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Adjust tools on smaller laptop screens */
+@media (max-height: 800px) {
+
+  .drawing-tool {
+    width: 70px;
+    height: 52px;
+    font-size: 30px;
+  }
+
+  .color-swatch {
+    width: 37px;
+    height: 37px;
+  }
+
+  #brush-size {
+    height: clamp(75px, 14vh, 140px);
+  }
+
+  .drawing-toolbar,
+  .colors-panel {
+    gap: 6px;
+    padding: 8px 6px;
+  }
+}
+
+/* Smaller screen widths */
+@media (max-width: 850px) {
+
+  .editor {
+    grid-template-columns: 80px minmax(0, 1fr) 80px;
+    gap: 8px;
+  }
+
+  .drawing-tool {
+    width: 60px;
+    height: 52px;
+    font-size: 28px;
+  }
+
+  #colors {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+  }
+
+  #brush-size {
+    height: clamp(80px, 15vh, 150px);
+  }
+}/* ===================================
+   DRAW TO LIFE - COLOR PALETTE
+=================================== */
+
+/* Colors in one vertical column */
+
+#colors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: clamp(4px, 0.7vh, 9px);
+  width: 100%;
+}
+
+/* Bigger color buttons */
+
+.color-swatch {
+  width: clamp(30px, 4.5vh, 44px);
+  height: clamp(30px, 4.5vh, 44px);
+
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Selected color */
+
+.color-swatch.selected {
+  border: 3px solid white;
+  box-shadow: 0 0 12px rgba(101, 225, 255, 0.6);
+  transform: scale(1.08);
+}
+
+/* Color panel */
+
+.colors-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+  padding: 10px 5px;
+}
+
+/* Brush size control */
+
+.toolbar-size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  margin-top: auto;
+
+  gap: 10px;
+  padding-top: 12px;
+}
+
+/* Label */
+
+.toolbar-size label {
+  font-size: 14px;
+  font-weight: 800;
+  color: #65e1ff;
+}
+
+/* Longer vertical slider */
+
+#brush-size {
+  writing-mode: vertical-lr;
+  direction: rtl;
+
+  width: 44px;
+  height: clamp(100px, 20vh, 200px);
+
+  margin: 5px auto;
+
+  accent-color: #65e1ff;
+  cursor: pointer;
+}
+
+/* Bigger slider handle */
+
+#brush-size::-webkit-slider-thumb {
+  width: 28px;
+  height: 28px;
+  cursor: grab;
+}
+
+/* Smaller screens */
+
+@media (max-height: 750px) {
+
+  #brush-size {
+    height: clamp(75px, 13vh, 120px);
+  }
+
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+  }
+
+  #colors {
+    gap: 4px;
+  }
+}/* Brush size slider with changing blue progress */
+
+#brush-size {
+  appearance: none;
+  -webkit-appearance: none;
+
+  writing-mode: vertical-lr;
+  direction: rtl;
+
+  width: 28px;
+  height: clamp(100px, 20vh, 200px);
+
+  border: none;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    to top,
+    #65e1ff 0%,
+    #65e1ff var(--brush-progress, 5%),
+    #34445c var(--brush-progress, 5%),
+    #34445c 100%
+  );
+
+  cursor: pointer;
+}
+
+/* Bigger blue circle */
+
+#brush-size::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+  border: 4px solid white;
+
+  background: #65e1ff;
+
+  box-shadow: 0 0 15px rgba(101, 225, 255, 0.5);
+
+  cursor: grab;
+}

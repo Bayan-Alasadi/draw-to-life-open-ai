@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Draw to Life — Projector</title>
+
+  <style>
+
+    /* I keept the projector styles in a separate file because style.css is already too long. */
+      /* Main projector colors */
+
+    :root {
+      --blue: #65e1ff;
+      --purple: #b18cff;
+      --pink: #ff83d6;
+      --text: #f3f8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      font-family: Arial, sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(55, 135, 240, 0.22),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(160, 80, 255, 0.22),
+          transparent 40%
+        ),
+        #080c1c;
+    }
+
+      /* Here I style the projector background. */
+      /* I use blue and purple gradients on a dark background. */
+      /* I add a moving neon effect. */
+      /* I use keyframes to animate the background. */
+      /* Here I organize the projector layout with Flexbox. */
+      /* Moving neon background */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at 20% 70%,
+          rgba(101, 225, 255, 0.12),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(177, 140, 255, 0.12),
+          transparent 35%
+        );
+
+      animation: backgroundMove 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundMove {
+      to {
+        transform: translate(2%, -2%);
+        opacity: 0.5;
+      }
+    }
+
+    /* Main layout */
+
+    .projector {
+      position: relative;
+      z-index: 1;
+
+      min-height: 100vh;
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      padding: 24px 35px;
+    }
+
+    /* Project title */
+    /* I use a blue color for the project name. */
+      /* I make the main title responsive. */
+      /* I add a colorful gradient to part of the title. */
+      /* Project title */
+
+    .header {
+      text-align: center;
+      margin-bottom: 17px;
+    }
+
+    .brand {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 5px;
+    }
+
+    h1 {
+      margin: 12px 0 6px;
+
+      font-size: clamp(30px, 4vw, 62px);
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+      );
+
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #a8bad7;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    /* Artwork area */
+    /* Here I create the area for the AI artwork. */
+      /* I center the content and add a soft neon border. */
+      /* Artwork canvas */
+    .art-stage {
+      position: relative;
+
+      flex: 1;
+      width: 100%;
+      min-height: 300px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      border: 2px solid rgba(140, 165, 255, 0.4);
+      border-radius: 25px;
+
+      background: rgba(16, 25, 48, 0.8);
+
+      box-shadow:
+        0 0 35px rgba(101, 225, 255, 0.1),
+        0 0 65px rgba(177, 140, 255, 0.08);
+    }
+
+    /* Neon border */
+
+    .art-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      border-radius: 25px;
+
+      box-shadow:
+        inset 0 0 35px rgba(101, 225, 255, 0.08);
+    }
+
+    /* Generated artwork, makes it fit and fill out the canvas */
+
+    #projector-image {
+      display: none;
+
+      max-width: 100%;
+      max-height: 100%;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      position: absolute;
+      inset: 0;
+
+      animation: artworkReveal 1s ease both;
+    }
+
+    @keyframes artworkReveal {
+      from {
+        opacity: 0;
+        transform: scale(1.04);
+        filter: blur(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+   /* Style waiting and loading messages. */
+      /* Waiting and loading screens */
+
+    .message {
+      text-align: center;
+      padding: 25px;
+      max-width: 600px;
+    }
+
+    .message-icon {
+      font-size: 75px;
+      margin-bottom: 20px;
+
+      filter: drop-shadow(
+        0 0 25px rgba(177, 140, 255, 0.6)
+      );
+    }
+
+    .message h2 {
+      font-size: clamp(24px, 3vw, 42px);
+      margin: 10px 0;
+    }
+
+    .message p {
+      color: #b4c4df;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* Animate the loading icon. */
+      /* Create the moving loading bar. */
+      /* Support reduced motion settings. */
+      /* Animated loading */
+
+    .loading-icon {
+      display: inline-block;
+      animation: floating 2s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      50% {
+        transform: translateY(-18px) rotate(15deg);
+      }
+    }
+
+    .loading-track {
+      width: min(300px, 80%);
+      height: 8px;
+      margin: 25px auto;
+
+      overflow: hidden;
+
+      background: #15243f;
+      border-radius: 20px;
+    }
+
+    .loading-bar {
+      width: 40%;
+      height: 100%;
+
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+      );
+
+      border-radius: 20px;
+
+      animation: loadingMove 2s linear infinite;
+    }
+
+    @keyframes loadingMove {
+      from {
+        transform: translateX(-100%);
+      }
+
+      to {
+        transform: translateX(350%);
+      }
+    }
+
+    /* Footer */
+
+    .footer {
+      padding-top: 16px;
+      text-align: center;
+
+      color: #9cadd0;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .footer span {
+      color: var(--blue);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+ <!-- I use main to organize the projector content. -->
+      <!-- I add a header with the project name and title. -->
+      <!-- Project title -->
+  <main class="projector">
+
+    <!-- Project title -->
+
+    <header class="header">
+
+      <div class="brand">
+        ✳ DRAW TO LIFE ✳
+      </div>
+
+      <h1>
+        Your imagination.
+        <span>Our canvas.</span>
+      </h1>
+
+      <p class="subtitle">
+        FROM A SIMPLE SKETCH TO A NEW REALITY
+      </p>
+
+    </header>
+
+
+    <!-- Main projector display -->
+
+    <section class="art-stage">
+
+      <!-- The AI image appears here -->
+
+      <img
+        id="projector-image"
+        alt="AI generated artwork">
+
+
+      <!-- Screen shown before generating -->
+
+      <div id="waiting" class="message">
+
+        <div class="message-icon">
+          ✨
+        </div>
+
+        <h2>
+          Waiting for imagination...
+        </h2>
+
+        <p>
+          Create a drawing on the laptop.
+          Your artwork will come to life here.
+        </p>
+
+      </div>
+
+
+      <!-- Screen shown while OpenAI generates -->
+
+      <div id="generating" class="message" hidden>
+
+        <div class="message-icon loading-icon">
+          🎨
+        </div>
+
+        <h2>
+          Bringing imagination to life...
+        </h2>
+
+        <p>
+          AI is transforming your drawing into a new masterpiece.
+        </p>
+
+        <div class="loading-track">
+          <div class="loading-bar"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+      DRAW <span>✦</span> TRANSFORM <span>✦</span> DISCOVER
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    // This connects the projector to the drawing website.
+    const channel = new BroadcastChannel("draw-to-life-projector");
+
+    const waiting = document.getElementById("waiting");
+    const generating = document.getElementById("generating");
+    const image = document.getElementById("projector-image");
+
+    // This changes the projector screen.
+    function showScreen(state, imageURL = "") {
+
+      waiting.hidden = state !== "waiting";
+      generating.hidden = state !== "generating";
+
+      image.style.display = state === "art" ? "block" : "none";
+
+      if (state === "art" && imageURL) {
+        image.src = imageURL;
+      }
+    }
+
+    // This receives messages from the laptop.
+    channel.addEventListener("message", event => {
+
+      const data = event.data;
+
+      if (!data || !data.type) return;
+
+      if (data.type === "generating") {
+        showScreen("generating");
+      }
+
+      if (data.type === "artwork") {
+        showScreen("art", data.image);
+      }
+
+      if (data.type === "reset") {
+        showScreen("waiting");
+      }
+
+    });
+
+    // Ask the drawing page for its current state.
+    channel.postMessage({ type: "request-state" });
+
+  </script>
+
+</body>
+</html>

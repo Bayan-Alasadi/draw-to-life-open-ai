@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080c1c"
+  >
+
+  <title>Draw to Life</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js lets the user draw on the canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+
+  <!-- Drawing and AI scripts -->
+  <script defer src="sketch.js"></script>
+  <script defer src="ai.js"></script>
+  <script defer src="experience.js"></script>
+
+  <!-- Connects the drawing to the projector -->
+  <script defer src="projector-sync.js"></script>
+
+</head>
+
+<body>
+
+  <main class="app">
+
+    <!-- Main header -->
+    <header class="hero">
+
+      <div class="brand">
+
+        <span class="brand-symbol">✳</span>
+
+        <span>DRAW TO LIFE</span>
+
+      </div>
+
+      <div class="hero-copy">
+
+        <h1>
+          Draw it.
+          <em>Dream it.</em>
+          Bring it to life.
+        </h1>
+
+        <p>
+          One simple sketch.
+          Endless imagination.
+          Powered by AI.
+        </p>
+
+      </div>
+
+      <!-- The three steps of the project -->
+      <div class="steps">
+
+        <span><b>01</b> SKETCH</span>
+
+        <span class="steps-arrow">→</span>
+
+        <span><b>02</b> TRANSFORM</span>
+
+        <span class="steps-arrow">→</span>
+
+        <span><b>03</b> REVEAL</span>
+
+      </div>
+
+    </header>
+
+    <!-- The drawing and AI panels -->
+    <section
+      class="studio"
+      aria-label="Interactive drawing studio"
+    >
+
+      <!-- Drawing panel -->
+      <section
+        class="panel create-panel"
+        aria-label="Drawing area"
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="eyebrow">
+              01 / YOUR IDEA
+            </span>
+
+            <h2>
+              Creative canvas
+              <span aria-hidden="true">✎</span>
+            </h2>
+
+          </div>
+
+          <span class="panel-badge">
+
+            <span class="dot dot-blue"></span>
+
+            DRAW HERE
+
+          </span>
+
+        </div>
+
+        <!-- Drawing tools, canvas and colors -->
+        <div class="editor">
+
+          <!-- Drawing toolbar -->
+          <aside
+            class="drawing-toolbar"
+            aria-label="Drawing tools"
+          >
+
+            <button
+              id="brush-btn"
+              class="drawing-tool active"
+              type="button"
+              title="Brush"
+              aria-label="Brush"
+            >
+              ✎
+            </button>
+
+            <button
+              id="eraser-btn"
+              class="drawing-tool"
+              type="button"
+              title="Eraser"
+              aria-label="Eraser"
+            >
+              ◇
+            </button>
+
+            <button
+              id="undo-btn"
+              class="drawing-tool"
+              type="button"
+              title="Undo"
+              aria-label="Undo"
+            >
+              ↶
+            </button>
+
+            <button
+              id="redo-btn"
+              class="drawing-tool"
+              type="button"
+              title="Redo"
+              aria-label="Redo"
+            >
+              ↷
+            </button>
+
+            <!-- Change the brush size -->
+            <div class="toolbar-size">
+
+              <label for="brush-size">
+                SIZE
+              </label>
+
+              <span id="brush-size-value">6</span>
+
+              <input
+                id="brush-size"
+                type="range"
+                min="2"
+                max="80"
+                step="1"
+                value="6"
+                aria-label="Brush size"
+              >
+
+            </div>
+
+          </aside>
+
+          <div class="canvas-column">
+
+            <div class="canvas-wrap">
+
+              <!-- p5.js creates the canvas here -->
+              <div id="canvas-host"></div>
+
+            </div>
+
+          </div>
+
+          <!-- JavaScript adds the drawing colors here -->
+          <aside
+            class="colors-panel"
+            aria-label="Drawing colors"
+          >
+
+            <h3>COLORS</h3>
+
+            <div id="colors"></div>
+
+          </aside>
+
+        </div>
+
+        <!-- Buttons for the drawing and AI features -->
+        <div class="bottom-actions">
+
+          <div class="action-buttons">
+
+            <button
+              id="clear-btn"
+              type="button"
+            >
+              ↺ Clear
+            </button>
+
+            <button
+              id="save-btn"
+              type="button"
+            >
+              ↓ Save sketch
+            </button>
+
+          </div>
+
+          <!-- Generate artwork with AI -->
+          <button
+            id="generate-btn"
+            type="button"
+          >
+            ✦ Generate with AI →
+          </button>
+
+          <!-- Open the projector view -->
+          <button
+            id="projector-btn"
+            type="button"
+          >
+            ▣ Open Projector
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- AI result panel -->
+      <section
+        class="panel result-panel"
+        aria-label="AI painting area"
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <span class="eyebrow">
+              02 / AI MAGIC
+            </span>
+
+            <h2>
+              Your masterpiece
+              <span aria-hidden="true">✦</span>
+            </h2>
+
+          </div>
+
+          <span
+            class="panel-badge"
+            id="result-badge"
+          >
+
+            <span class="dot dot-purple"></span>
+
+            WAITING FOR ART
+
+          </span>
+
+        </div>
+
+        <!-- The AI artwork appears here -->
+        <div class="result-stage">
+
+          <img
+            id="ai-result"
+            alt="AI generated painting"
+            hidden
+          >
+
+          <!-- Waiting screen before generating art -->
+          <div
+            class="result-placeholder"
+            id="result-placeholder"
+          >
+
+            <div
+              class="art-orbit"
+              aria-hidden="true"
+            >
+              <span>✦</span>
+              <span>✧</span>
+              <span>✳</span>
+            </div>
+
+            <div class="placeholder-icon">
+              🎨
+            </div>
+
+            <h3>
+              Magic starts with you.
+            </h3>
+
+            <p>
+              Draw something on the left
+              and press
+              <strong>Generate with AI</strong>
+              to reveal your artwork.
+            </p>
+
+            <div class="placeholder-pills">
+
+              <span>YOUR SKETCH</span>
+              <span>→</span>
+              <span>AI ART</span>
+
+            </div>
+
+          </div>
+
+          <!-- Animation while AI generates the image -->
+          <div id="loading" hidden>
+
+            <div class="loading-content">
+
+              <div
+                class="magic-particles"
+                aria-hidden="true"
+              >
+                <span>✨</span>
+                <span>💜</span>
+                <span>⭐</span>
+                <span>🎨</span>
+                <span>🌈</span>
+                <span>✨</span>
+              </div>
+
+              <div class="magic-brush">
+                🖌️
+              </div>
+
+              <h3>
+                Bringing your art to life...
+              </h3>
+
+              <p id="loading-message">
+                Mixing colors...
+              </p>
+
+              <div class="loading-track">
+                <div class="loading-bar"></div>
+              </div>
+
+              <p class="loading-tip">
+                Your imagination is becoming art.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Message and buttons below the AI result -->
+        <div class="result-footer">
+
+          <div class="result-tip">
+
+            <span class="sparkle">✧</span>
+
+            <span id="result-caption">
+              Every masterpiece begins with a doodle.
+            </span>
+
+          </div>
+
+          <div class="result-buttons">
+
+            <button
+              id="save-ai-btn"
+              type="button"
+              hidden
+            >
+              ↓ Save AI Art
+            </button>
+
+            <button
+              id="remove-ai-btn"
+              type="button"
+              hidden
+            >
+              ↩ Back to sketch
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+    <!-- Shows updates from the AI process -->
+    <p
+      id="ai-status"
+      class="ai-status"
+      role="status"
+      aria-live="polite"
+    ></p>
+
+    <!-- Page footer -->
+    <footer>
+
+      DRAW TO LIFE
+
+      <span>✳</span>
+
+      A creative experience · Draw → AI → Discover
+
+    </footer>
+
+  </main>
+
+</body>
+</html>
