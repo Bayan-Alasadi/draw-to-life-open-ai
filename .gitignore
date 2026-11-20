@@ -1,0 +1,10 @@
+# Protect OpenAI API key
+.env
+.env.*
+!.env.example
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore Node.js dependencies
+node_modules/
